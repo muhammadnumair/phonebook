@@ -1,0 +1,31 @@
+﻿@model MiniPhoneBook.Models.ContactViewModels
+
+@{
+    ViewBag.Title = "Contact Detail";
+}
+
+<h2>Contact Detail</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit Contact", "Edit", new { id = Model.ContactId }, new { @class ="btn btn-info"})
+</p>
