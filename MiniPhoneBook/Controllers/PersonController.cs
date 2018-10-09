@@ -49,7 +49,31 @@ namespace MiniPhoneBook.Controllers
         // GET: Contacts/Details/5
         public ActionResult Details(int? id)
         {
-            
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Person");
+            }
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
+            PhoneBookDbEntities db = new PhoneBookDbEntities();
+            var item = db.People.Where(p => p.PersonId == id).SingleOrDefault();
+            PersonViewModels obj = new PersonViewModels();
+            obj.PersonId = item.PersonId;
+            obj.FirstName = item.FirstName;
+            obj.MiddleName = item.MiddleName;
+            obj.LastName = item.LastName;
+            obj.DateOfBirth = item.DateOfBirth;
+            obj.AddedOn = item.AddedOn;
+            obj.AddedBy = item.AddedBy;
+            obj.HomeAddress = item.HomeAddress;
+            obj.HomeCity = item.HomeCity;
+            obj.FaceBookAccountId = item.FaceBookAccountId;
+            obj.LinkedInId = item.LinkedInId;
+            obj.TwitterId = item.TwitterId;
+            obj.EmailId = item.EmailId;
+
+            return View(obj);
         }
 
         // GET: Contacts/Create
@@ -64,7 +88,45 @@ namespace MiniPhoneBook.Controllers
         [HttpPost]
         public ActionResult Create(CreateViewModels collection)
         {
-            
+            try
+            {
+                if (collection.Person.ImageFile != null)
+                {
+                    string filesname = collection.Person.ImageFile.FileName;
+                    collection.Person.ImageFile.SaveAs(Path.Combine("~/Images/", filesname));
+                }
+                //string filename = Path.GetFileNameWithoutExtension(collection.Person.ImageFile.FileName);
+                //string filext = Path.GetExtension(collection.Person.ImageFile.FileName);
+                //filename = filename + DateTime.Now.ToString("yymmssfff") + filext;
+                //filename = Path.Combine(Server.MapPath("~/Images/"), filename);
+                //collection.Person.ImageFile.SaveAs(filename);
+
+                PhoneBookDbEntities db = new PhoneBookDbEntities();
+                Person obj = new Person();
+                obj.FirstName = collection.Person.FirstName;
+                obj.LastName = collection.Person.LastName;
+                obj.MiddleName = collection.Person.MiddleName;
+                obj.DateOfBirth = collection.Person.DateOfBirth;
+                obj.AddedOn = DateTime.Today;
+                obj.AddedBy = User.Identity.GetUserId();
+                obj.HomeAddress = collection.Person.HomeAddress;
+                obj.HomeCity = collection.Person.HomeCity;
+                obj.FaceBookAccountId = collection.Person.FaceBookAccountId;
+                obj.LinkedInId = collection.Person.LinkedInId;
+                obj.TwitterId = collection.Person.TwitterId;
+                obj.EmailId = collection.Person.EmailId;
+                //obj.ImagePath = "~/Images/" + filename;
+
+                db.People.Add(obj);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                return View();
+            }
         }
 
         // GET: Contacts/Edit/5
