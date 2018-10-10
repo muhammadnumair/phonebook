@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="table-wrapper">
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2>Person <b>Details</b></h2>
+            </div>
+            <div class="col-sm-8">
+                @Html.ActionLink("Add New Person", "Create", "Person", null, new { @class = "btn btn-info" })
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Date Of Birth</th>
+                <th>Added On</th>
+                <th>Home City</th>
+                <th>Contacts</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ 
+                var counter = 1;
+                if (Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@counter</td>
+                        <td><a href="#"><img src="https://www.tutorialrepublic.com/examples/images/avatar/1.jpg" class="avatar" alt="Avatar"> @item.FirstName @item.LastName</a></td>
+                        <td>@if (@item.DateOfBirth != null)
+                        {@item.DateOfBirth.ToString("MM/dd/yyyy")}</td>
+                        <td>@item.AddedOn.ToString("MM/dd/yyyy")</td>
+                        <td> @item.HomeCity</td>
+                        <td>@Html.ActionLink("View Contacts", "Index", "Contact", new { id = item.PersonId }, new { @class = "btn btn-primary" })</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.PersonId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.PersonId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.PersonId })
+                        </td>
+                    </tr>
+                        counter = counter + 1;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4"><p><b>No Persons Found</b></p></td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+
