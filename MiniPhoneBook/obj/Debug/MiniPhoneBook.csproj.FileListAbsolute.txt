@@ -325,7 +325,6 @@ C:\Users\Muhammad Numair\Desktop\Github\phonebook\MiniPhoneBook\bin\Microsoft.Ow
 C:\Users\Muhammad Numair\Desktop\Github\phonebook\MiniPhoneBook\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Muhammad Numair\Desktop\Github\phonebook\MiniPhoneBook\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Muhammad Numair\Desktop\Github\phonebook\MiniPhoneBook\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Muhammad Numair\Desktop\Github\phonebook\MiniPhoneBook\obj\Debug\MiniPhoneBook.csprojResolveAssemblyReference.cache
 C:\Users\Muhammad Numair\Desktop\Github\phonebook\MiniPhoneBook\obj\Debug\MiniPhoneBook.dll
 C:\Users\Muhammad Numair\Desktop\Github\phonebook\MiniPhoneBook\obj\Debug\MiniPhoneBook.pdb
 C:\Users\Hp\Desktop\dsffd\phonebook\MiniPhoneBook\bin\ApplicationInsights.config
